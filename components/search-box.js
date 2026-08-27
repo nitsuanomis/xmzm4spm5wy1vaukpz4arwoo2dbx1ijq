@@ -19,14 +19,6 @@ search_box.onkeypress = function(e) {
 };
 // ** BANGS **
 // shortcuts to common websites
-/*
-var queries = {
-    "!y": "https://www.youtube.com/results?search_query=",
-    "!e": "https://www.ebay.com/",
-    "!wa": "https://www.wolframalpha.com/",
-    "!books": "http://bookzz.org/s/?q=",
-};
-*/
 var queries = {
 	"!fd": {
 		"type": "servicenow",
@@ -67,20 +59,11 @@ function checkBangs(query) {
 	var query_arr = query.split(' ');
 	var bangPart = query_arr[0];
 	var search_engine = searchEngines[ENGINE];
-	// withoutSearch = ["!e", "!wa"]; // websites without search option
 	if(queries.hasOwnProperty(bangPart)) {
 		var type = queries[bangPart].type;
         var instance = queries[bangPart].instance;
 		var url = queries[bangPart].url;
 		var queryUrl = queries[bangPart].queryUrl;
-		/*
-		if (withoutSearch.indexOf(bangPart) == -1) {
-		    query = createQuery(query_arr.slice(1).join(' '));
-		    window.location = queries[bangPart] + query;
-		} else {
-		    window.location = queries[bangPart];
-		}
-		*/
 		switch(type) {
 			case "direct":
 				window.location = url;
@@ -95,8 +78,7 @@ function checkBangs(query) {
 				break;
 			case "servicenow":
 				query = createServiceNowQuery(query_arr.slice(1).join(" "));
-				// window.location = "https://" + instance + ".service-now.com/" + query;
-				console.log("query: [" + query + "]");
+				window.location = "https://" + instance + ".service-now.com/" + query;
 				break;
 			default:
 				window.location = ERROR;
@@ -131,10 +113,6 @@ function createServiceNowQuery(query) {
 	if (isNaN(reference) == false) {
 		referenceType = "number";
 	}
-
-	console.log("selector: [" + selector + "]");
-	console.log("reference: [" + reference + "]");
-	console.log("referenceType: [" + referenceType + "]");
 
 	var knownTables = {
 		"i": {"prefix": "INC", "table": "incident", "padding": 7},
