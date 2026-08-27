@@ -95,7 +95,7 @@ function checkBangs(query) {
 				break;
 			case "servicenow":
 				query = createServiceNowQuery(query_arr.slice(1).join(" "));
-				window.location = "https://" + instance + ".service-now.com/" + query;
+				// window.location = "https://" + instance + ".service-now.com/" + query;
 				break;
 			default:
 				window.location = ERROR;
@@ -111,7 +111,17 @@ function createQuery(query) {
 }
 // create additional string for servicenow urls
 function createServiceNowQuery(query) {
-    switch(query) {
+	var selection, reference;
+
+	if (query.indexOf(" ") = -1) {
+		selector = query;
+	} else {
+		selector = query.substring(query.indexOf(" "));
+	}
+
+	console.log(selector);
+	
+    switch(selector) {
         case "":
             return "";
 			break;
