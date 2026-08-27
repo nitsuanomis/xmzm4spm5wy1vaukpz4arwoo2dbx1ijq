@@ -54,7 +54,7 @@ var queries = {
     },
     "!w": {
         "type": "direct",
-        "url": "https://wolframalpha.com/"
+        "url": "https://wolframalpha.com/input?i=!QUERY!"
     },
     "!y": {
         "type": "query",
