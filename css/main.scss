@@ -397,6 +397,12 @@ a:focus {
     padding-left: 13px;
 }
 
+.last_updated {
+    position: fixed;
+    top: 50%;
+    left: 0;
+}
+
 .buttons-container {
     display: flex;
     justify-content: center;
