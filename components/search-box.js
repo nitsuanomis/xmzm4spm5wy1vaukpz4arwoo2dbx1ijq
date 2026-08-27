@@ -111,7 +111,7 @@ function createQuery(query) {
 }
 // create additional string for servicenow urls
 function createServiceNowQuery(query) {
-	var selection, reference;
+	var selector, reference, referenceType;
 
 	if (query.indexOf(" ") == -1) {
 		selector = query;
@@ -119,7 +119,16 @@ function createServiceNowQuery(query) {
 		selector = query.substring(0, query.indexOf(" "));
 	}
 
+	// if selector contains a number, extract it
+	if (/\d/.test(selector)) {
+		reference = selector.replace(/[^0-9]/g, "");
+		selector = selector.replace(/[0-9]/g, "");
+		referenceType = number;
+	}
+	
 	console.log("selector: [" + selector + "]");
+	console.log("reference: [" + reference + "]");
+	console.log("referenceType: [" + referenceType + "]");
 	
     switch(selector) {
         case "":
