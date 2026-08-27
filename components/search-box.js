@@ -96,6 +96,7 @@ function checkBangs(query) {
 			case "servicenow":
 				query = createServiceNowQuery(query_arr.slice(1).join(" "));
 				// window.location = "https://" + instance + ".service-now.com/" + query;
+				console.log("query: [" + query + "]");
 				break;
 			default:
 				window.location = ERROR;
@@ -124,20 +125,34 @@ function createServiceNowQuery(query) {
 	if (/\d/.test(selector)) {
 		reference = selector.replace(/[^0-9]/g, "");
 		selector = selector.replace(/[0-9]/g, "");
+	}
+
+	// if reference is a number, set the referenceType to "number"
+	if (isNaN(reference) == false) {
 		referenceType = "number";
 	}
-	
+
 	console.log("selector: [" + selector + "]");
 	console.log("reference: [" + reference + "]");
 	console.log("referenceType: [" + referenceType + "]");
+
+	var knownTables = {
+		"i": "incident",
+		"inc": "incident"
+	}
+
+	if (knownTables.hasKey(selector)) {
+		return knownTables[selector];
+	}
 	
-    switch(selector) {
+	switch(selector) {
         case "":
             return "";
 			break;
         default:
             return query;
     }
+	
 }
 // when search box lose focus, remove active class
 search_box.onblur = function(e) {
