@@ -145,10 +145,12 @@ function createServiceNowQuery(query) {
 		var prefix = knownTables[selector].prefix;
 		var table = knownTables[selector].table;
 		var padding = knownTables[selector].padding;
-		var knownTableQuery = table + "_list.do"
+		var knownTableQuery = table;
 
-		if (referenceType == "number") {
-			knownTableQuery += "&sysparm_query=number=" + prefix + String(reference).padStart(padding, '0');
+		if (referenceType != "number") {
+			knownTableQuery += "_list.do";
+		} else {
+			knownTableQuery += ".do?sysparm_query=number=" + prefix + String(reference).padStart(padding, '0');
 		}
 
 		return knownTableQuery;		
