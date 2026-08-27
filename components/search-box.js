@@ -59,7 +59,8 @@ var queries = {
     "!y": {
         "type": "query",
         "url": "https://www.youtube.com/results?search_query=!QUERY!"
-    }
+    },
+    "!z": {}
 };
 
 
