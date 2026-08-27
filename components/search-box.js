@@ -53,7 +53,7 @@ var queries = {
         "url": "https://www.google.com/search?q=!QUERY!"
     },
     "!w": {
-        "type": "direct",
+        "type": "query",
         "url": "https://wolframalpha.com/input?i=!QUERY!"
     },
     "!y": {
