@@ -3,9 +3,11 @@ var ENGINE = "google"; // google or ddg
 var ERROR = "https://xkcd.com";
 var search_box = document.getElementsByClassName('search-box')[0];
 var search_parent = search_box.parentNode;
+
 // TODO: when typing in search box, display relevant links from user saved links below
 // var links = document.querySelectorAll("a");
 // search box logic
+
 search_box.onkeypress = function(e) {
 	if(!e) e = window.event;
 	var keyCode = e.keyCode || e.which;
@@ -17,53 +19,37 @@ search_box.onkeypress = function(e) {
 		return false;
 	}
 };
+
 // ** BANGS **
 // shortcuts to common websites
 var queries = {
-	"!fd": {
-		"type": "servicenow",
-		"instance": "forvismazarsdev"
-	},
-	"!ft": {
-		"type": "servicenow",
-		"instance": "forvismazarstest"
-	},
-	"!fp": {
-		"type": "servicenow",
-		"instance": "forvismazarsprod"
-	},
-	"!g": {
-		"type": "query",
-		"url": "https://www.google.com/",
-		"queryUrl": "https://www.google.com/search?q=!QUERY!"
-	},
-	"!w": {
-		"type": "query",
-		"url": "https://wolframalpha.com/",
-		"queryUrl": "https://wolframalpha.com/input?i=!QUERY!"
-	},
-	"!y": {
-		"type": "query",
-		"url": "https://www.youtube.com/",
-		"queryUrl": "https://www.youtube.com/results?search_query=!QUERY!"
-	},
+	"!fd": {"type": "servicenow", "instance": "forvismazarsdev"},
+	"!ft": {"type": "servicenow", "instance": "forvismazarstest"},
+	"!fp": {"type": "servicenow", "instance": "forvismazarsprod"},
+	"!g": {"type": "query", "url": "https://www.google.com/", "queryUrl": "https://www.google.com/search?q=!QUERY!"},
+	"!w": {"type": "query", "url": "https://wolframalpha.com/", "queryUrl": "https://wolframalpha.com/input?i=!QUERY!"},
+	"!y": {"type": "query", "url": "https://www.youtube.com/", "queryUrl": "https://www.youtube.com/results?search_query=!QUERY!"},
 	"!z": {}
 };
+
 var searchEngines = {
 	"google": "https://www.google.com/search?&q=",
 	"ddg": "https://duckduckgo.com/?q=",
 };
+
 // check if there is any bang in query ==> direct search on desired website
 // else search with google
 function checkBangs(query) {
 	var query_arr = query.split(' ');
 	var bangPart = query_arr[0];
 	var search_engine = searchEngines[ENGINE];
+
 	if(queries.hasOwnProperty(bangPart)) {
 		var type = queries[bangPart].type;
         var instance = queries[bangPart].instance;
 		var url = queries[bangPart].url;
 		var queryUrl = queries[bangPart].queryUrl;
+
 		switch(type) {
 			case "direct":
 				window.location = url;
@@ -83,15 +69,19 @@ function checkBangs(query) {
 			default:
 				window.location = ERROR;
 		}
+
 	} else {
 		query = createQuery(query);
 		window.location = search_engine + query;
 	}
+	
 }
+
 // encoding url (so searching for c++ will actually search for c++ and not for c)
 function createQuery(query) {
 	return encodeURIComponent(query);
 }
+
 // create additional string for servicenow urls
 function createServiceNowQuery(query) {
 	var selector, reference, referenceType;
@@ -143,18 +133,22 @@ function createServiceNowQuery(query) {
     }
 	
 }
+
 // when search box lose focus, remove active class
 search_box.onblur = function(e) {
 	search_parent.classList.remove('search-active');
 };
+
 // when search box gets focus add active class
 search_box.addEventListener("focus", function(e) {
 	search_parent.classList.add('search-active');
 });
+
 // add active class to x pseudo element every time search_box is focused
 if(search_box == document.activeElement) {
 	search_parent.classList.add('search-active');
 }
+
 // clear search box when x pseudo element is clicked
 var searchClear = document.getElementsByClassName('search-clear')[0];
 searchClear.addEventListener('click', function() {
