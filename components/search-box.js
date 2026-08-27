@@ -142,9 +142,9 @@ function createServiceNowQuery(query) {
 	}
 
 	if (knownTables.hasOwnProperty(selector)) {
-		var prefix = knowTables[selector].prefix;
-		var table = knowTables[selector].table;
-		var padding = knowTables[selector].padding;
+		var prefix = knownTables[selector].prefix;
+		var table = knownTables[selector].table;
+		var padding = knownTables[selector].padding;
 		var knownTableQuery = table + "_list.do"
 
 		if (referenceType == "number") {
