@@ -397,23 +397,8 @@ a:focus {
     padding-left: 13px;
 }
 
-.last-updated {
-    position: fixed;
-    top: 50%;
-    width: 50px;
-    height: 50px;
-    border: $focused-border;
-    cursor: pointer;
-    transform: translate(0, -50%);
-    font-size: 40px;
-    line-height: 50px;
-    margin: 10px;
-    color: $color-link-focused;
-    user-select: none;
-    -moz-user-select: none;
-    border-radius: 50%;
-    z-index: 2;
-    left: 0;
+.lu {
+    color: red;
 }
 
 .buttons-container {
