@@ -93,7 +93,7 @@ function checkBangs(query) {
         */
         switch (queryType) {
             case "direct" :
-                window.location = queryURL;
+                window.location = queryUrl;
                 break;
             case "query" :
                 query = createQuery(query_arr.slice(1).join(" "));
