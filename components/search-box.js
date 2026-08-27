@@ -1,6 +1,7 @@
 // SEARCH BOX - contains code (logic) for search box on the front page
 
 var ENGINE = "google"; // google or ddg
+var ERROR = "https://xkcd.com";
 var search_box = document.getElementsByClassName('search-box')[0];
 var search_parent = search_box.parentNode;
 
@@ -26,11 +27,39 @@ search_box.onkeypress = function(e) {
 
 // ** BANGS **
 // shortcuts to common websites
+/*
 var queries = {
     "!y": "https://www.youtube.com/results?search_query=",
     "!e": "https://www.ebay.com/",
     "!wa": "https://www.wolframalpha.com/",
     "!books": "http://bookzz.org/s/?q=",
+};
+*/
+var queries = {
+    "!fd": {
+        "type": "servicenow",
+        "url": "forvismazarsdev"
+    },
+    "!ft": {
+        "type": "servicenow",
+        "url": "forvismazarstest"
+    },
+    "!fp": {
+        "type": "servicenow",
+        "url": "forvismazarsprod"
+    },
+    "!g": {
+        "type": "query",
+        "url": "https://www.google.com/search&q=!QUERY!"
+    },
+    "!w": {
+        "type": "direct",
+        "url": "https://wolframalpha.com/"
+    }
+    "!y": {
+        "type": "query",
+        "url": "https://www.youtube.com/results?search_query=!QUERY!"
+    }
 };
 
 
@@ -48,15 +77,33 @@ function checkBangs(query) {
 
     var search_engine = searchEngines[ENGINE];
 
-    withoutSearch = ["!e", "!wa"]; // websites without search option
+    // withoutSearch = ["!e", "!wa"]; // websites without search option
 
     if (queries.hasOwnProperty(bangPart)) {
-        // ebay got fucked up search query, wtf ...
+        var queryType = queries[bangPart].type;
+        var queryUrl = queries[bangPart].url;
+        
+        /*
         if (withoutSearch.indexOf(bangPart) == -1) {
             query = createQuery(query_arr.slice(1).join(' '));
             window.location = queries[bangPart] + query;
         } else {
             window.location = queries[bangPart];
+        }
+        */
+        switch (queryType) {
+            case "direct" :
+                window.location = queryURL;
+                break;
+            case "query" :
+                query = createQuery(query_arr.slice(1).join(" '));
+                window.location = queryUrl.replace("!QUERY!", query);
+                break;
+            case "servicenow" :
+                window.location = "https://www.servicenow.com/";
+                break;
+            default:
+                window.location = ERROR;
         }
     } else {
         query = createQuery(query);
