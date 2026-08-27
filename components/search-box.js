@@ -116,10 +116,10 @@ function createServiceNowQuery(query) {
 	if (query.indexOf(" ") == -1) {
 		selector = query;
 	} else {
-		selector = query.substring(query.indexOf(" "));
+		selector = query.substring(0, query.indexOf(" "));
 	}
 
-	console.log(selector);
+	console.log("selector: [" + selector + "]");
 	
     switch(selector) {
         case "":
