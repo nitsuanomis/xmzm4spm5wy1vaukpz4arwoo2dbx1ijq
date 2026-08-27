@@ -141,7 +141,7 @@ function createServiceNowQuery(query) {
 		"inc": "incident"
 	}
 
-	if (knownTables.hasKey(selector)) {
+	if (knownTables.hasOwnProperty(selector)) {
 		return knownTables[selector];
 	}
 	
