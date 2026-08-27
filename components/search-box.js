@@ -50,7 +50,7 @@ var queries = {
     },
     "!g": {
         "type": "query",
-        "url": "https://www.google.com/search&q=!QUERY!"
+        "url": "https://www.google.com/search?q=!QUERY!"
     },
     "!w": {
         "type": "direct",
