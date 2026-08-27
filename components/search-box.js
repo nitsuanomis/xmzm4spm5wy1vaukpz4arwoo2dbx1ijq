@@ -50,15 +50,18 @@ var queries = {
     },
     "!g": {
         "type": "query",
-        "url": "https://www.google.com/search?q=!QUERY!"
+        "url": "https://www.google.com/",
+        "queryUrl": "https://www.google.com/search?q=!QUERY!"
     },
     "!w": {
         "type": "query",
-        "url": "https://wolframalpha.com/input?i=!QUERY!"
+        "url": "https://wolframalpha.com/",
+        "queryUrl": "https://wolframalpha.com/input?i=!QUERY!"
     },
     "!y": {
         "type": "query",
-        "url": "https://www.youtube.com/results?search_query=!QUERY!"
+        "url": "https://www.youtube.com/",
+        "queryUrl": "https://www.youtube.com/results?search_query=!QUERY!"
     },
     "!z": {}
 };
@@ -81,8 +84,9 @@ function checkBangs(query) {
     // withoutSearch = ["!e", "!wa"]; // websites without search option
 
     if (queries.hasOwnProperty(bangPart)) {
-        var queryType = queries[bangPart].type;
-        var queryUrl = queries[bangPart].url;
+        var type = queries[bangPart].type;
+        var url = queries[bangPart].url;
+        var queryUrl = queries[bangPart].queryUrl;
         
         /*
         if (withoutSearch.indexOf(bangPart) == -1) {
@@ -92,13 +96,19 @@ function checkBangs(query) {
             window.location = queries[bangPart];
         }
         */
-        switch (queryType) {
+        switch (type) {
             case "direct" :
-                window.location = queryUrl;
+                window.location = url;
                 break;
             case "query" :
                 query = createQuery(query_arr.slice(1).join(" "));
-                window.location = queryUrl.replace("!QUERY!", query);
+
+                if (query == "") {
+                    window.location = url;
+                } else {
+                    window.location = queryUrl.replace("!QUERY!", query);
+                }
+                
                 break;
             case "servicenow" :
                 window.location = "https://www.servicenow.com/";
