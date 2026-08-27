@@ -123,7 +123,7 @@ function createServiceNowQuery(query) {
 	if (/\d/.test(selector)) {
 		reference = selector.replace(/[^0-9]/g, "");
 		selector = selector.replace(/[0-9]/g, "");
-		referenceType = number;
+		referenceType = "number";
 	}
 	
 	console.log("selector: [" + selector + "]");
