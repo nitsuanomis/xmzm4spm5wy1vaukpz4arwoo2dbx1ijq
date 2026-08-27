@@ -137,12 +137,21 @@ function createServiceNowQuery(query) {
 	console.log("referenceType: [" + referenceType + "]");
 
 	var knownTables = {
-		"i": "incident",
-		"inc": "incident"
+		"i": {"prefix": "INC", "table": "incident", "padding": 7},
+		"inc": {"prefix": "INC", "table": "incident", "padding": 7}
 	}
 
 	if (knownTables.hasOwnProperty(selector)) {
-		return knownTables[selector];
+		var prefix = knowTables[selector].prefix;
+		var table = knowTables[selector].table;
+		var padding = knowTables[selector].padding;
+		var knownTableQuery = table + "_list.do"
+
+		if (referenceType == "number") {
+			knownTableQuery += "&sysparm_query=number=" + prefix + String(reference).padStart(padding, '0');
+		}
+
+		return knownTableQuery;		
 	}
 	
 	switch(selector) {
