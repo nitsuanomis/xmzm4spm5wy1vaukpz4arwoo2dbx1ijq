@@ -96,7 +96,7 @@ function checkBangs(query) {
                 window.location = queryURL;
                 break;
             case "query" :
-                query = createQuery(query_arr.slice(1).join(" '));
+                query = createQuery(query_arr.slice(1).join(" "));
                 window.location = queryUrl.replace("!QUERY!", query);
                 break;
             case "servicenow" :
