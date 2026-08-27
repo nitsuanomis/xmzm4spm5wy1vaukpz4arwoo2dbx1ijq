@@ -117,9 +117,10 @@ function createServiceNowQuery(query) {
 		selector = query;
 	} else {
 		selector = query.substring(0, query.indexOf(" "));
+		reference = query.substring(query.indexOf(" ") + 1);
 	}
 
-	// if selector contains a number, extract it
+	// if selector contains a number, extract it as the reference
 	if (/\d/.test(selector)) {
 		reference = selector.replace(/[^0-9]/g, "");
 		selector = selector.replace(/[0-9]/g, "");
