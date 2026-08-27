@@ -113,7 +113,7 @@ function createQuery(query) {
 function createServiceNowQuery(query) {
 	var selection, reference;
 
-	if (query.indexOf(" ") = -1) {
+	if (query.indexOf(" ") == -1) {
 		selector = query;
 	} else {
 		selector = query.substring(query.indexOf(" "));
