@@ -411,7 +411,10 @@ a:focus {
 }
 
 .last-updated {
-  color: red;
+  color: #ccc;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .buttons-container {
